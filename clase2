@@ -1,0 +1,30 @@
+alumnos = []
+
+datos_alumnos = {}
+
+print("REGISTRO DE ALUMNOS")
+
+cantidad = int(input("¿Cuántas alumnos deseas registrar?: "))
+
+for i in range(cantidad):
+    print("\nAlumnos", i + 1)
+
+    nombre = input("Nombre: ")
+    edad = int(input("Edad: "))
+    ciudad = input("Ciudad: ")
+
+    alumnos.append(nombre)
+
+    info = (edad, ciudad)
+
+    datos_alumnos[nombre] = info
+
+print("\n ALUMNOS REGISTRADAS")
+
+for alumnos in alumnos:
+    print("\nNombre:", alumnos)
+    print("Edad:", datos_alumnos[alumnos][0])
+    print("Ciudad:", datos_alumnos[alumnos][1])
+
+print("\n DICCIONARIO COMPLETO")
+print(datos_alumnos)
