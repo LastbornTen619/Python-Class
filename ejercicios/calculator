@@ -1,0 +1,105 @@
+import tkinter as tk
+
+# ==========================================
+# 1. THE BACKEND (The Kitchen / Logic)
+# ==========================================
+def calculate_tip(bill_amount, tip_percentage):
+    try:
+        bill = float(bill_amount)
+        tip_percent = float(tip_percentage) / 100
+        return bill * tip_percent
+    except ValueError:
+        return "Invalid Input"
+
+
+# ==========================================
+# 2. THE FRONTEND (The Vibrant UI)
+# ==========================================
+# Added 'event=None' so this function can handle both mouse clicks and Enter keypresses
+def on_click_calculate(event=None):
+    user_bill = bill_entry.get()
+    user_tip = tip_entry.get()
+    
+    tip_result = calculate_tip(user_bill, user_tip)
+    
+    if tip_result == "Invalid Input":
+        # Crimson red text for error messages
+        result_label.config(text="Numbers only, please!", fg="#FFE647")
+    else:
+        # Bright mint green for successful calculation
+        result_label.config(text=f"Tip Amount: ${tip_result:.2f}", fg="#2ED573")
+
+
+# --- Color Palette Constants ---
+BG_MAIN = "#1E1E24"      # Dark charcoal-purple background
+BG_CARD = "#2A2A35"      # Lighter purple-gray for input sections
+TEXT_LIGHT = "#F5F6FA"   # Crisp off-white for regular labels
+ACCENT_PINK = "#BBFF008B"  # Vibrant neon pink for the main button
+INPUT_BG = "#353545"     # Darker box for text fields
+
+# Window Setup
+root = tk.Tk()
+root.title("Vibrant Tip Calculator")
+root.geometry("340x320")
+root.config(bg=BG_MAIN) # Apply main background color
+
+# Title Heading
+title_label = tk.Label(
+    root, 
+    text="TIP CALCULATOR", 
+    font=("Helvetica Neue", 14, "bold"), 
+    bg=BG_MAIN, 
+    fg=ACCENT_PINK
+)
+title_label.pack(pady=(20, 10))
+
+# Container Frame (Creates a "card" layout to group inputs neatly)
+input_frame = tk.Frame(root, bg=BG_CARD, padx=15, pady=15, bd=0)
+input_frame.pack(padx=20, fill="x")
+
+# Input 1: Bill Amount
+bill_label = tk.Label(input_frame, text="Total Bill ($)", font=("Arial", 10, "bold"), bg=BG_CARD, fg=TEXT_LIGHT)
+bill_label.pack(anchor="w")
+bill_entry = tk.Entry(input_frame, font=("Arial", 11), bg=INPUT_BG, fg="white", insertbackground="white", bd=0, relief="flat")
+bill_entry.pack(fill="x", pady=(5, 10), ipady=4) # ipady adds internal vertical height to the text box
+
+# Input 2: Tip Percentage
+tip_label = tk.Label(input_frame, text="Tip Percentage (%)", font=("Arial", 10, "bold"), bg=BG_CARD, fg=TEXT_LIGHT)
+tip_label.pack(anchor="w")
+tip_entry = tk.Entry(input_frame, font=("Arial", 11), bg=INPUT_BG, fg="white", insertbackground="white", bd=0, relief="flat")
+tip_entry.insert(0, "15")
+tip_entry.pack(fill="x", pady=(5, 0), ipady=4)
+
+# The Action Button (Neon Pink, white text, links to on_click_calculate via mouse click)
+calculate_button = tk.Button(
+    root, 
+    text="CALCULATE", 
+    command=on_click_calculate,
+    font=("Helvetica Neue", 11, "bold"),
+    bg=ACCENT_PINK,
+    fg="white",
+    activebackground="#EFC507",
+    activeforeground="white",
+    bd=0,
+    cursor="hand2" # Changes mouse icon to a pointing hand on hover
+)
+calculate_button.pack(fill="x", padx=20, pady=15, ipady=6)
+
+# Output: The Result Label
+result_label = tk.Label(
+    root, 
+    text="Tip Amount: $0.00", 
+    font=("Helvetica Neue", 13, "bold"), 
+    bg=BG_MAIN, 
+    fg=TEXT_LIGHT
+)
+result_label.pack(pady=10)
+
+# ==========================================
+# 3. KEYBOARD EVENT BINDING
+# ==========================================
+# This listens for the keyboard Enter key and links it to on_click_calculate
+root.bind('<Return>', on_click_calculate)
+
+# Start the application loop (keeps the window open)
+root.mainloop()
