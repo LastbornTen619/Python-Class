@@ -33,13 +33,13 @@ py -m pip install PySide6
 Ejemplo:
 
 ```bash
-py ejemplos/08_Interfaces/01_ventana_basica.py
+py ejemplos/04-pyside6/01_ventana_basica.py
 ```
 
 O tambien:
 
 ```bash
-python ejemplos/08_Interfaces/01_ventana_basica.py
+python ejemplos/04-pyside6/01_ventana_basica.py
 ```
 
 ## Recomendacion para estudiar

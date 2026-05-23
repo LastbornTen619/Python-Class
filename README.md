@@ -22,7 +22,6 @@ Python-Class/
 		01-funciones/
 		02-condicionales/
 		03-bucles/
-		08_Interfaces/
 	ejercicios/
 		nombre-apellido/
 			01-funciones/
